@@ -5,10 +5,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 public abstract class GameObject {
-    protected Texture textura;
-    protected Vector2 posicion;
-    protected Vector2 velocidad;
-    protected float radio; // para colisiones
+    private Texture textura;
+    private Vector2 posicion;
+    private Vector2 velocidad;
+    private float radio; // para colisiones
     public GameObject(Texture textura, float x, float y, float velX, float velY, float radio) {
         this.textura = textura;
         this.posicion = new Vector2(x, y);
