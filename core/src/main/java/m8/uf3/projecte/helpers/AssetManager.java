@@ -24,7 +24,7 @@ public class AssetManager {
         corazon = new Texture(Gdx.files.internal("heart.png"));
         explosion = new Texture(Gdx.files.internal("explosion.png"));
         manzanaC = new Texture(Gdx.files.internal("manzana_cortada.png"));
-        peraC = new Texture(Gdx.files.internal("pera_cortada"));
+        peraC = new Texture(Gdx.files.internal("pera_cortada.png"));
         limonC = new Texture(Gdx.files.internal("limon_cortado.png"));
         naranjaC = new Texture(Gdx.files.internal("naranja_cortada.png"));
         sandiaC = new Texture(Gdx.files.internal("sandia_cortada.png"));
