@@ -1,23 +1,22 @@
 package m8.uf3.projecte;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import m8.uf3.projecte.helpers.AssetManager;
-
+import m8.uf3.projecte.screens.GameScreen;
 import m8.uf3.projecte.screens.StartScreen;
-
-/** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class MainGame extends Game {
-
+    public SpriteBatch batch;
     @Override
     public void create() {
         AssetManager.load();
-        setScreen(new StartScreen(this));
-
+        batch = new SpriteBatch();
+        setScreen(new GameScreen(this));
     }
-
     @Override
     public void dispose() {
         super.dispose();
+        if (batch != null) batch.dispose();
         AssetManager.dispose();
     }
 }
