@@ -137,18 +137,17 @@ public class GameScreen implements Screen {
                 entera = AssetManager.pina;
                 cortada = AssetManager.pinaC;
         }
-        float x    = MathUtils.random(50, Gdx.graphics.getWidth() - 50);
-        float y    = -entera.getHeight();
+        float x = MathUtils.random(50, Gdx.graphics.getWidth() - 50);
+        float y = -entera.getHeight();
         float velX = MathUtils.random(-100f, 100f);
         float velY = MathUtils.random(600f, 800f);
         objetos.add(new Fruit(entera, cortada, x, y, velX, velY));
     }
-
     private void generarBomba() {
-        Texture entera   = AssetManager.bomba;
-        Texture explTex  = AssetManager.explosion;  // la textura de la explosión
-        float x    = MathUtils.random(50, Gdx.graphics.getWidth() - 50);
-        float y    = -entera.getHeight();
+        Texture entera = AssetManager.bomba;
+        Texture explTex = AssetManager.explosion;  // la textura de la explosión
+        float x = MathUtils.random(50, Gdx.graphics.getWidth() - 50);
+        float y = -entera.getHeight();
         float velX = MathUtils.random(-80f, 80f);
         float velY = MathUtils.random(700f, 900f);
         objetos.add(new Bomb(entera, explTex, x, y, velX, velY));
