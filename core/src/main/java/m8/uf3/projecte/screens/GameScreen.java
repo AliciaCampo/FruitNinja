@@ -8,11 +8,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.audio.Sound;
-
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
 import m8.uf3.projecte.MainGame;
 import m8.uf3.projecte.helpers.AssetManager;
 import m8.uf3.projecte.helpers.InputHandler;
@@ -109,29 +107,51 @@ public class GameScreen implements Screen {
     }
     private void generarFruta() {
         int idx = MathUtils.random(0, 6);
-        Texture tex;
+        Texture entera, cortada;
         switch (idx) {
-            case 0: tex = AssetManager.manzana; break;
-            case 1: tex = AssetManager.pera;    break;
-            case 2: tex = AssetManager.limon;   break;
-            case 3: tex = AssetManager.naranja; break;
-            case 4: tex = AssetManager.sandia;  break;
-            case 5: tex = AssetManager.melon;   break;
-            default:tex = AssetManager.pina;    break;
+            case 0:
+                entera = AssetManager.manzana;
+                cortada = AssetManager.manzanaC;
+                break;
+            case 1:
+                entera = AssetManager.pera;
+                cortada = AssetManager.peraC;
+                break;
+            case 2:
+                entera = AssetManager.limon;
+                cortada = AssetManager.limonC;
+                break;
+            case 3:
+                entera = AssetManager.naranja;
+                cortada = AssetManager.naranjaC;
+                break;
+            case 4:
+                entera = AssetManager.sandia;
+                cortada = AssetManager.sandiaC;
+                break;
+            case 5:
+                entera = AssetManager.melon;
+                cortada = AssetManager.melonC;
+                break;
+            default:
+                entera = AssetManager.pina;
+                cortada = AssetManager.pinaC;
         }
-        float x = MathUtils.random(50, Gdx.graphics.getWidth() - 50);
-        float y = -tex.getHeight();
+        float x    = MathUtils.random(50, Gdx.graphics.getWidth() - 50);
+        float y    = -entera.getHeight();
         float velX = MathUtils.random(-100f, 100f);
         float velY = MathUtils.random(600f, 800f);
-        objetos.add(new Fruit(tex, x, y, velX, velY));
+        objetos.add(new Fruit(entera, cortada, x, y, velX, velY));
     }
+
     private void generarBomba() {
-        Texture tex = AssetManager.bomba;
-        float x = MathUtils.random(50, Gdx.graphics.getWidth() - 50);
-        float y = -tex.getHeight();
+        Texture entera   = AssetManager.bomba;
+        Texture explTex  = AssetManager.explosion;  // la textura de la explosión
+        float x    = MathUtils.random(50, Gdx.graphics.getWidth() - 50);
+        float y    = -entera.getHeight();
         float velX = MathUtils.random(-80f, 80f);
         float velY = MathUtils.random(700f, 900f);
-        objetos.add(new Bomb(tex, x, y, velX, velY));
+        objetos.add(new Bomb(entera, explTex, x, y, velX, velY));
     }
     @Override public void resize(int width, int height) {}
     @Override public void pause() {}
