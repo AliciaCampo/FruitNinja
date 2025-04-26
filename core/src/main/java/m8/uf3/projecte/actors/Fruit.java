@@ -31,7 +31,13 @@ public class Fruit extends GameObject {
     }
     @Override
     public void dibujar(SpriteBatch batch) {
-        batch.draw(textura, posicion.x, posicion.y);
+        batch.draw(
+            textura,
+            posicion.x,
+            posicion.y,
+            textura.getWidth() * 5f,    // doble de ancho
+            textura.getHeight() * 5f    // doble de alto
+        );
     }
     @Override
     public boolean esPeligroso() {

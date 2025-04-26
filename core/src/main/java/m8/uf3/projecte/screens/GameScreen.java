@@ -42,26 +42,49 @@ public class GameScreen implements Screen {
         actualizar(delta);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         lote.begin();
-        lote.draw(AssetManager.fondoJuego, 0, 0);
+        lote.draw(
+            AssetManager.fondoJuego,
+            0, 0,
+            Gdx.graphics.getWidth(),
+            Gdx.graphics.getHeight()
+        );
         for (GameObject obj : objetos) {
             obj.dibujar(lote);
         }
-        for (int i = 0; i < vidas; i++) {
-            lote.draw(AssetManager.corazon,
-                20 + i * 40,
-                Gdx.graphics.getHeight() - 60,
-                32, 32);
-        }
-        lote.draw(AssetManager.moneda,
-            20,
-            Gdx.graphics.getHeight() - 110,
-            32, 32);
-        AssetManager.font.draw(lote,
+
+        int margen = 30;
+        int tamañoIcono = 80;
+        lote.draw(
+            AssetManager.moneda,
+            margen,                                      // x: margen izquierdo
+            Gdx.graphics.getHeight() - margen - tamañoIcono, // y: desde arriba hacia abajo
+            tamañoIcono,
+            tamañoIcono
+        );
+
+        AssetManager.font.getData().setScale(3f);
+        AssetManager.font.draw(
+            lote,
             String.valueOf(puntuacion),
-            60,
-            Gdx.graphics.getHeight() - 80);
+            margen + tamañoIcono + 20,                       // x: a la derecha de la moneda + espacio
+            Gdx.graphics.getHeight() - margen - 0           // y: un poquito más bajo para alinear bonito
+        );
+        AssetManager.font.getData().setScale(1f);
+
+        for (int i = 0; i < vidas; i++) {
+            lote.draw(
+                AssetManager.corazon,
+                Gdx.graphics.getWidth() - margen - tamañoIcono - i * (tamañoIcono + 10),  // x: de derecha a izquierda
+                Gdx.graphics.getHeight() - margen - tamañoIcono,                          // y: desde arriba hacia abajo
+                tamañoIcono,
+                tamañoIcono
+            );
+        }
+
         lote.end();
     }
+
+
     private void actualizar(float delta) {
         temporizadorFruta += delta;
         temporizadorBomba  += delta;
@@ -137,10 +160,10 @@ public class GameScreen implements Screen {
                 entera = AssetManager.pina;
                 cortada = AssetManager.pinaC;
         }
-        float x = MathUtils.random(50, Gdx.graphics.getWidth() - 50);
+        float x = MathUtils.random(100, Gdx.graphics.getWidth() - 100);
         float y = -entera.getHeight();
-        float velX = MathUtils.random(-100f, 100f);
-        float velY = MathUtils.random(600f, 800f);
+        float velX = MathUtils.random(-250f, 250f);
+        float velY = MathUtils.random(900f, 1100f);
         objetos.add(new Fruit(entera, cortada, x, y, velX, velY));
     }
     private void generarBomba() {
