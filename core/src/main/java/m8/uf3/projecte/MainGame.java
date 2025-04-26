@@ -11,7 +11,7 @@ public class MainGame extends Game {
     public void create() {
         AssetManager.load();
         batch = new SpriteBatch();
-        setScreen(new GameScreen(this));
+        setScreen(new StartScreen(this));
     }
     @Override
     public void dispose() {

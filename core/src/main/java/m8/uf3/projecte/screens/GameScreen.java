@@ -35,7 +35,7 @@ public class GameScreen implements Screen {
     public void show() {
         manejadorEntrada = new InputHandler();
         Gdx.input.setInputProcessor(manejadorEntrada);
-        AssetManager.musicaFondo.loop();
+        AssetManager.musicaFondo.setLooping(true);
     }
     @Override
     public void render(float delta) {
