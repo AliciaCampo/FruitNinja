@@ -37,7 +37,7 @@ public abstract class GameObject {
         return new Circle(
             posicion.x + textura.getWidth() / 2f,
             posicion.y + textura.getHeight() / 2f,
-            radio
+            radio * 2.0f
         );
     }
 
