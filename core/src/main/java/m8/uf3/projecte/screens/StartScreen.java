@@ -26,6 +26,9 @@ public class StartScreen implements Screen {
     private Label textLbl;
     private TextButton startButton;
     private Music music;
+    private float scaleDirection = 1;
+    private float currentScale = 7;
+
 
     public StartScreen(MainGame game) {
         this.game = game;
@@ -84,7 +87,23 @@ public class StartScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        currentScale += scaleDirection * delta * 0.3f;
+
+        if (currentScale > 7.3f) {
+            currentScale = 7.3f;
+            scaleDirection = -1;
+        } else if (currentScale < 6.7f) {
+            currentScale = 6.7f;
+            scaleDirection = 1;
+        }
+
+        textLbl.setFontScale(currentScale);
+        textLbl.pack();
+        textLbl.setPosition(
+            (stage.getWidth() - textLbl.getWidth()) / 2,
+            stage.getHeight() / 2
+        );
+
         stage.act(delta);
         stage.draw();
     }
