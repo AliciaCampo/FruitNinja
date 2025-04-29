@@ -27,7 +27,10 @@ public class GameOverScreen implements Screen {
     private int punts;
     private MainGame game;
 
-    public GameOverScreen(MainGame game){
+    private float scaleDirection = 1;
+    private float currentScale = 7;
+
+    public GameOverScreen(MainGame game, int punts){
         this.game = game;
         this.punts = punts;
 
@@ -69,10 +72,6 @@ public class GameOverScreen implements Screen {
         stage.addActor(exitButton);
 
 
-
-
-
-
         music = AssetManager.musicaFondo;
         if (music != null){
             music.setLooping(true);
@@ -90,6 +89,23 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        currentScale += scaleDirection * delta * 0.3f;
+
+        if (currentScale > 7.3f) {
+            currentScale = 7.3f;
+            scaleDirection = -1;
+        } else if (currentScale < 6.7f) {
+            currentScale = 6.7f;
+            scaleDirection = 1;
+        }
+
+        gameOverLabel.setFontScale(currentScale);
+        gameOverLabel.pack();
+        gameOverLabel.setPosition(
+            (stage.getWidth() - gameOverLabel.getWidth()) / 2,
+            stage.getHeight() / 2
+        );
+
         stage.act(delta);
         stage.draw();
     }

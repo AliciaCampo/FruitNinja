@@ -107,7 +107,7 @@ public class GameScreen implements Screen {
                         iter.remove();
                         if (vidas <= 0) {
                             AssetManager.musicaFondo.stop();
-                            //juego.setScreen(new GameOverScreen(juego, puntuacion)); Pasar los datos a GameOverScreen
+                            juego.setScreen(new GameOverScreen(juego, puntuacion));
                             return;
                         }
                     } else {
