@@ -14,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.sun.tools.javac.Main;
 
 import m8.uf3.projecte.MainGame;
 import m8.uf3.projecte.helpers.AssetManager;
@@ -46,6 +45,17 @@ public class GameOverScreen implements Screen {
             (stage.getWidth() - scoreLabel.getWidth()) / 2,
             (stage.getHeight() - scoreLabel.getHeight()) / 2
         );
+        stage.addActor(scoreLabel);
+
+        gameOverLabel = new Label("Game Over", labelStyle);
+        gameOverLabel.setFontScale(currentScale);
+        gameOverLabel.pack();
+        gameOverLabel.setPosition(
+            (stage.getWidth() - gameOverLabel.getWidth()) / 2,
+            stage.getHeight() / 2 + 100
+        );
+        stage.addActor(gameOverLabel);
+
 
         //Texture
         Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
@@ -85,7 +95,7 @@ public class GameOverScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 music.stop();
-                dispose();
+                Gdx.app.exit();
             }
         });
 
