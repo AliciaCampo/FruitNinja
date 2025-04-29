@@ -72,7 +72,7 @@ public class GameOverScreen implements Screen {
 
         //Buttons
         reloadButton = new TextButton("Tornar a jugar", buttonStyle);
-        reloadButton.setSize(200, 75);
+        reloadButton.setSize(500, 75);
         reloadButton.getLabel().setFontScale(1.5f);
         reloadButton.setPosition((stage.getWidth() - reloadButton.getWidth()) / 2, stage.getHeight() / 2 - 200);
         stage.addActor(reloadButton);
@@ -80,7 +80,7 @@ public class GameOverScreen implements Screen {
         exitButton = new TextButton("Sortir", buttonStyle);
         exitButton.setSize(200, 75);
         exitButton.getLabel().setFontScale(1.5f);
-        exitButton.setPosition((stage.getWidth() - exitButton.getWidth()) / 2, stage.getHeight() / 2 - 250);
+        exitButton.setPosition((stage.getWidth() - exitButton.getWidth()) / 2, stage.getHeight() / 2 - 300);
         stage.addActor(exitButton);
 
         reloadButton.addListener(new ClickListener() {
