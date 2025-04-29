@@ -42,7 +42,7 @@ public class GameOverScreen implements Screen {
         scoreLabel = new Label("Score: " + punts, labelStyle);
         scoreLabel.setFontScale(3);
         scoreLabel.setPosition(
-            (stage.getWidth() - scoreLabel.getWidth()) / 2,
+            (stage.getWidth() - ((scoreLabel.getWidth()) / 10)),
             (stage.getHeight() - scoreLabel.getHeight()) / 2
         );
         stage.addActor(scoreLabel);
