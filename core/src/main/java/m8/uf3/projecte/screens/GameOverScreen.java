@@ -41,9 +41,10 @@ public class GameOverScreen implements Screen {
         Label.LabelStyle labelStyle = new Label.LabelStyle(AssetManager.font, null);
         scoreLabel = new Label("Score: " + punts, labelStyle);
         scoreLabel.setFontScale(3);
+        scoreLabel.pack(); // <-- Important!
         scoreLabel.setPosition(
-            (stage.getWidth() - ((scoreLabel.getWidth()) / 10)),
-            (stage.getHeight() - scoreLabel.getHeight()) / 2
+            (stage.getWidth() - scoreLabel.getWidth()) / 2f,
+            (stage.getHeight() - scoreLabel.getHeight()) / 2f
         );
         stage.addActor(scoreLabel);
 
