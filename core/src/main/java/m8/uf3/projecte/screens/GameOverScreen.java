@@ -6,9 +6,11 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -71,6 +73,21 @@ public class GameOverScreen implements Screen {
         exitButton.setPosition((stage.getWidth() - exitButton.getWidth()) / 2, stage.getHeight() / 2 - 250);
         stage.addActor(exitButton);
 
+        reloadButton.addListener(new ClickListener() {
+            @Override
+                public void clicked(InputEvent event, float x, float y) {
+                music.stop();
+                game.setScreen(new GameScreen(game));
+            }
+        });
+
+        exitButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                music.stop();
+                dispose();
+            }
+        });
 
         music = AssetManager.musicaFondo;
         if (music != null){
