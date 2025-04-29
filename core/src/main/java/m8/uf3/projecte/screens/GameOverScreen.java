@@ -1,4 +1,116 @@
 package m8.uf3.projecte.screens;
 
-public class GameOverScreen {
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.sun.tools.javac.Main;
+
+import m8.uf3.projecte.MainGame;
+import m8.uf3.projecte.helpers.AssetManager;
+
+public class GameOverScreen implements Screen {
+    private Stage stage;
+    private TextButton reloadButton;
+    private TextButton exitButton;
+    private Music music;
+    private Label gameOverLabel;
+    private Label scoreLabel;
+    private int punts;
+    private MainGame game;
+
+    public GameOverScreen(MainGame game){
+        this.game = game;
+        this.punts = punts;
+
+        stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
+
+        Label.LabelStyle labelStyle = new Label.LabelStyle(AssetManager.font, null);
+        scoreLabel = new Label("Score: " + punts, labelStyle);
+        scoreLabel.setFontScale(3);
+        scoreLabel.setPosition(
+            (stage.getWidth() - scoreLabel.getWidth()) / 2,
+            (stage.getHeight() - scoreLabel.getHeight()) / 2
+        );
+
+        //Texture
+        Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        pixmap.setColor(1f, 0f, 0f, 1f);
+        pixmap.fill();
+        Texture pixmapTexture = new Texture(pixmap);
+        Drawable background = new TextureRegionDrawable(new TextureRegion(pixmapTexture));
+        pixmap.dispose();
+
+        //Style
+        TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
+        buttonStyle.font = AssetManager.fontW;
+        buttonStyle.up = background;
+
+        //Buttons
+        reloadButton = new TextButton("Tornar a jugar", buttonStyle);
+        reloadButton.setSize(200, 75);
+        reloadButton.getLabel().setFontScale(1.5f);
+        reloadButton.setPosition((stage.getWidth() - reloadButton.getWidth()) / 2, stage.getHeight() / 2 - 200);
+        stage.addActor(reloadButton);
+
+        exitButton = new TextButton("Sortir", buttonStyle);
+        exitButton.setSize(200, 75);
+        exitButton.getLabel().setFontScale(1.5f);
+        exitButton.setPosition((stage.getWidth() - exitButton.getWidth()) / 2, stage.getHeight() / 2 - 250);
+        stage.addActor(exitButton);
+
+
+
+
+
+
+        music = AssetManager.musicaFondo;
+        if (music != null){
+            music.setLooping(true);
+            music.setVolume(0.7f);
+        }
+    }
+
+    @Override
+    public void show() {
+        if (music != null){
+            music.play();
+        }
+        //Preguntar si volen el num de vides i punts o si no afecta.
+    }
+
+    @Override
+    public void render(float delta) {
+        stage.act(delta);
+        stage.draw();
+    }
+
+    @Override
+    public void resize(int width, int height) {}
+
+    @Override
+    public void pause() {}
+
+    @Override
+    public void resume() {}
+
+    @Override
+    public void hide() {}
+
+    @Override
+    public void dispose() {
+        stage.dispose();
+        if (music != null){
+            music.dispose();
+        }
+    }
 }
