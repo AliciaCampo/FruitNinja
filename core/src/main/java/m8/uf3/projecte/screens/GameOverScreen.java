@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -37,6 +38,10 @@ public class GameOverScreen implements Screen {
 
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
+
+        Image backgroundimage = new Image(AssetManager.fondoJuego);
+        backgroundimage.setFillParent(true);
+        stage.addActor(backgroundimage);
 
         Label.LabelStyle labelStyle = new Label.LabelStyle(AssetManager.font, null);
         scoreLabel = new Label("Score: " + punts, labelStyle);
