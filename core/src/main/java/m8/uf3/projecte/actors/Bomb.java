@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Bomb extends GameObject {
     private final Texture texturaExplosión;
     private boolean explotada = false;
+    public boolean isExplotada() {
+        return explotada;
+    }
     private float temporizadorExplosión = 0f;
     private static final float DURACIÓN_EXPLOSIÓN = 3f; // segundos
     public Bomb(Texture textura, Texture texExplosión,

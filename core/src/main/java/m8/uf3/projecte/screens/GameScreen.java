@@ -86,6 +86,7 @@ public class GameScreen implements Screen {
 
 
     private void actualizar(float delta) {
+        // 1) generación de objetos
         temporizadorFruta += delta;
         temporizadorBomba  += delta;
         if (temporizadorFruta > 0.8f) {
@@ -96,38 +97,61 @@ public class GameScreen implements Screen {
             generarBomba();
             temporizadorBomba = 0f;
         }
+
+        // 2) detección de cortes: llamar a cortar()/explotar() + puntos/vidas, SIN eliminar aún
         for (Vector2 punto : manejadorEntrada.getTrayectoCorte()) {
-            Iterator<GameObject> iter = objetos.iterator();
-            while (iter.hasNext()) {
-                GameObject obj = iter.next();
-                if (obj.haSidoCortado(punto)) {
-                    if (obj.esPeligroso()) {
+            for (GameObject obj : objetos) {
+                if (!obj.haSidoCortado(punto)) continue;
+
+                if (obj.esPeligroso()) {
+                    Bomb bomba = (Bomb) obj;
+                    // solo explotar/contar vidas la primera vez
+                    if (!bomba.isExplotada()) {
+                        bomba.explotar();
                         AssetManager.explBomba.play();
                         vidas--;
-                        iter.remove();
                         if (vidas <= 0) {
                             AssetManager.musicaFondo.stop();
                             juego.setScreen(new GameOverScreen(juego, puntuacion));
                             return;
                         }
-                    } else {
+                    }
+                } else {
+                    Fruit fruta = (Fruit) obj;
+                    // solo cortar/contar puntos la primera vez
+                    if (!fruta.isCortada()) {
+                        fruta.cortar();
                         AssetManager.corte.play();
                         puntuacion++;
-                        iter.remove();
                     }
                 }
+
+                // no eliminamos aquí, dejamos que el bucle de “eliminación diferida” lo haga
             }
         }
+
         manejadorEntrada.limpiarTrayecto();
-        Iterator<GameObject> iter2 = objetos.iterator();
-        while (iter2.hasNext()) {
-            GameObject obj = iter2.next();
+        // 3) actualización de posición y eliminación diferida
+        Iterator<GameObject> iter = objetos.iterator();
+        while (iter.hasNext()) {
+            GameObject obj = iter.next();
             obj.actualizar(delta);
-            if (obj.estaFueraPantalla()) {
-                iter2.remove();
+
+            // fruta cortada fuera de pantalla
+            if (obj instanceof Fruit && ((Fruit) obj).estaDesaparecida()) {
+                iter.remove();
+            }
+            // bomba explotada y animación terminada
+            else if (obj instanceof Bomb && ((Bomb) obj).haTerminadoExplosión()) {
+                iter.remove();
+            }
+            // cualquier objeto que, por otro motivo, haya salido de pantalla
+            else if (obj.estaFueraPantalla()) {
+                iter.remove();
             }
         }
     }
+
     private void generarFruta() {
         int idx = MathUtils.random(0, 6);
         Texture entera, cortada;

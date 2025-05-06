@@ -6,6 +6,9 @@ import com.badlogic.gdx.math.Vector2;
 public class Fruit extends GameObject {
     private final Texture texturaCortada;
     private boolean cortada = false;
+    public boolean isCortada() {
+        return cortada;
+    }
     public Fruit(Texture texturaEntera,
                  Texture texturaCortada,
                  float x, float y,
