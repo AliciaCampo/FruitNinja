@@ -35,14 +35,12 @@ public class GameScreen implements Screen {
     public void show() {
         manejadorEntrada = new InputHandler();
         Gdx.input.setInputProcessor(manejadorEntrada);
-
         if (AssetManager.musicaFondo != null) {
             AssetManager.musicaFondo.setLooping(true);
             AssetManager.musicaFondo.setVolume(0.5f);
             AssetManager.musicaFondo.play();
         }
     }
-
     @Override
     public void render(float delta) {
         actualizar(delta);
@@ -57,7 +55,6 @@ public class GameScreen implements Screen {
         for (GameObject obj : objetos) {
             obj.dibujar(lote);
         }
-
         int margen = 30;
         int tamañoIcono = 80;
         lote.draw(
@@ -89,7 +86,6 @@ public class GameScreen implements Screen {
 
         lote.end();
     }
-
 
     private void actualizar(float delta) {
         // 1) generación de objetos

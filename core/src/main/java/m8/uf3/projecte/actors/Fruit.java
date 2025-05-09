@@ -2,6 +2,7 @@ package m8.uf3.projecte.actors;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 public class Fruit extends GameObject {
     private final Texture texturaCortada;
@@ -40,6 +41,14 @@ public class Fruit extends GameObject {
             posicion.y,
             textura.getWidth() * 5f,    // doble de ancho
             textura.getHeight() * 5f    // doble de alto
+        );
+    }
+    @Override
+    public Circle getCirculoColision() {
+        return new Circle(
+            posicion.x + textura.getWidth() / 4f,
+            posicion.y + textura.getHeight() / 4f,
+            radio * 4.0f
         );
     }
     @Override
