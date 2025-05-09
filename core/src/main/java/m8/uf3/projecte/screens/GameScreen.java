@@ -1,5 +1,4 @@
 package m8.uf3.projecte.screens;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -64,7 +63,6 @@ public class GameScreen implements Screen {
             tamañoIcono,
             tamañoIcono
         );
-
         AssetManager.font.getData().setScale(3f);
         AssetManager.font.draw(
             lote,
@@ -73,7 +71,6 @@ public class GameScreen implements Screen {
             Gdx.graphics.getHeight() - margen - 0           // y: un poquito más bajo para alinear bonito
         );
         AssetManager.font.getData().setScale(1f);
-
         for (int i = 0; i < vidas; i++) {
             lote.draw(
                 AssetManager.corazon,
@@ -83,10 +80,8 @@ public class GameScreen implements Screen {
                 tamañoIcono
             );
         }
-
         lote.end();
     }
-
     private void actualizar(float delta) {
         // 1) generación de objetos
         temporizadorFruta += delta;
@@ -99,12 +94,10 @@ public class GameScreen implements Screen {
             generarBomba();
             temporizadorBomba = 0f;
         }
-
         // 2) detección de cortes: llamar a cortar()/explotar() + puntos/vidas, SIN eliminar aún
         for (Vector2 punto : manejadorEntrada.getTrayectoCorte()) {
             for (GameObject obj : objetos) {
                 if (!obj.haSidoCortado(punto)) continue;
-
                 if (obj.esPeligroso()) {
                     Bomb bomba = (Bomb) obj;
                     // solo explotar/contar vidas la primera vez
@@ -127,18 +120,15 @@ public class GameScreen implements Screen {
                         puntuacion++;
                     }
                 }
-
                 // no eliminamos aquí, dejamos que el bucle de “eliminación diferida” lo haga
             }
         }
-
         manejadorEntrada.limpiarTrayecto();
         // 3) actualización de posición y eliminación diferida
         Iterator<GameObject> iter = objetos.iterator();
         while (iter.hasNext()) {
             GameObject obj = iter.next();
             obj.actualizar(delta);
-
             // fruta cortada fuera de pantalla
             if (obj instanceof Fruit && ((Fruit) obj).estaDesaparecida()) {
                 iter.remove();
@@ -153,7 +143,6 @@ public class GameScreen implements Screen {
             }
         }
     }
-
     private void generarFruta() {
         int idx = MathUtils.random(0, 6);
         Texture entera, cortada;
