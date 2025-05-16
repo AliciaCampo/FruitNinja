@@ -117,7 +117,7 @@ public class StartScreen implements Screen {
                     labelStyle.font = AssetManager.font;
                 }
 
-                Label helpText = new Label("¡Bienvenido a Fruit Ninja!\n\n- Toca o arrastra para cortar la fruta.\n- Evita las bombas.\n- Consigue la mayor puntuación posible.\n\n¡Buena suerte!", skin);
+                Label helpText = new Label("Benvingut a Fruit Ninja!\n\n- Arrossega per tallar la fruita.\n- Evita les bombes.\n- Aconsegueix la puntuacio mes alta possible.\n\nBona sort!", skin);
                 helpText.setStyle(labelStyle);
                 helpText.setFontScale(3f);
                 helpDialog.getContentTable().add(helpText).pad(20);
@@ -125,7 +125,7 @@ public class StartScreen implements Screen {
                 TextButton.TextButtonStyle closeButtonStyle = new TextButton.TextButtonStyle();
                 closeButtonStyle.font = skin.getFont("default");
                 closeButtonStyle.up = skin.getDrawable("default-round");
-                TextButton closeButton = new TextButton("Cerrar", closeButtonStyle);
+                TextButton closeButton = new TextButton("Tancar", closeButtonStyle);
                 closeButton.getLabel().setFontScale(2f);
                 helpDialog.button(closeButton);
                 helpDialog.show(stage);
