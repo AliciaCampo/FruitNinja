@@ -8,7 +8,7 @@ public class Bomb extends GameObject {
         return explotada;
     }
     private float temporizadorExplosión = 0f;
-    private static final float DURACIÓN_EXPLOSIÓN = 3f; // segundos
+    private static final float DURACIÓN_EXPLOSIÓN = 3f;
     public Bomb(Texture textura, Texture texExplosión,
                 float x, float y,
                 float velX, float velY) {

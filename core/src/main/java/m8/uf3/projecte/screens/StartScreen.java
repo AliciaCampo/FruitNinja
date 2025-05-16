@@ -1,5 +1,4 @@
 package m8.uf3.projecte.screens;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
@@ -23,7 +22,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import m8.uf3.projecte.MainGame;
 import m8.uf3.projecte.helpers.AssetManager;
-
 public class StartScreen implements Screen {
     private Stage stage;
     private MainGame game;
@@ -32,7 +30,6 @@ public class StartScreen implements Screen {
     private Music music;
     private float scaleDirection = 1;
     private float currentScale = 7;
-
     public StartScreen(MainGame game) {
         this.game = game;
         stage = new Stage(new ScreenViewport());
@@ -163,23 +160,14 @@ public class StartScreen implements Screen {
         stage.act(delta);
         stage.draw();
     }
-
     @Override
-    public void resize(int width, int height) {
-    }
-
+    public void resize(int width, int height) {}
     @Override
-    public void pause() {
-    }
-
+    public void pause() {}
     @Override
-    public void resume() {
-    }
-
+    public void resume() {}
     @Override
-    public void hide() {
-    }
-
+    public void hide() {}
     @Override
     public void dispose() {
         stage.dispose();

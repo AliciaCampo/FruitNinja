@@ -20,7 +20,6 @@ public class Fruit extends GameObject {
         if (!cortada) {
             cortada = true;
             this.textura = texturaCortada;
-            // Empujón hacia abajo al cortarla
             this.velocidad.set(0, -200f);
         }
     }
@@ -38,8 +37,8 @@ public class Fruit extends GameObject {
             textura,
             posicion.x,
             posicion.y,
-            textura.getWidth() * 5f,    // doble de ancho
-            textura.getHeight() * 5f    // doble de alto
+            textura.getWidth() * 5f,
+            textura.getHeight() * 5f
         );
     }
     @Override

@@ -5,7 +5,6 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-
 public class AssetManager {
     public  static Texture manzana, pera, limon, naranja, sandia, melon, pina, bomba, moneda, corazon, explosion;
     public static Texture manzanaC, peraC, limonC, naranjaC, sandiaC, melonC, pinaC;
@@ -13,7 +12,6 @@ public class AssetManager {
     public static Sound explBomba, corte;
     public static Music musicaFondo;
     public static BitmapFont font, fontW;
-
     public static void load() {
         manzana = new Texture(Gdx.files.internal("images/manzana_entera.png"));
         pera = new Texture(Gdx.files.internal("images/pera_entera.png"));
@@ -41,7 +39,6 @@ public class AssetManager {
         font = new BitmapFont(Gdx.files.internal("font/font.fnt"));
         fontW = new BitmapFont(Gdx.files.internal("font/fontwhite.fnt"));
     }
-
     public static void dispose() {
         manzana.dispose();
         pera.dispose();

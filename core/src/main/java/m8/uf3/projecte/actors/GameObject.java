@@ -4,16 +4,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 public abstract class GameObject {
-    // Cambiado a protected para que las subclases puedan usarlos/reasignarlos
     protected Texture textura;
     protected Vector2 posicion;
     protected Vector2 velocidad;
     protected float radio; // para colisiones
     public GameObject(Texture textura, float x, float y, float velX, float velY, float radio) {
-        this.textura   = textura;
-        this.posicion  = new Vector2(x, y);
+        this.textura = textura;
+        this.posicion = new Vector2(x, y);
         this.velocidad = new Vector2(velX, velY);
-        this.radio     = radio;
+        this.radio = radio;
     }
     public void actualizar(float delta) {
         posicion.x += velocidad.x * delta;

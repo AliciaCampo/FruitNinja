@@ -58,8 +58,8 @@ public class GameScreen implements Screen {
         int tamañoIcono = 80;
         lote.draw(
             AssetManager.moneda,
-            margen,                                      // x: margen izquierdo
-            Gdx.graphics.getHeight() - margen - tamañoIcono, // y: desde arriba hacia abajo
+            margen,
+            Gdx.graphics.getHeight() - margen - tamañoIcono,
             tamañoIcono,
             tamañoIcono
         );
@@ -67,15 +67,15 @@ public class GameScreen implements Screen {
         AssetManager.font.draw(
             lote,
             String.valueOf(puntuacion),
-            margen + tamañoIcono + 20,                       // x: a la derecha de la moneda + espacio
-            Gdx.graphics.getHeight() - margen - 0           // y: un poquito más bajo para alinear bonito
+            margen + tamañoIcono + 20,
+            Gdx.graphics.getHeight() - margen - 0
         );
         AssetManager.font.getData().setScale(1f);
         for (int i = 0; i < vidas; i++) {
             lote.draw(
                 AssetManager.corazon,
-                Gdx.graphics.getWidth() - margen - tamañoIcono - i * (tamañoIcono + 10),  // x: de derecha a izquierda
-                Gdx.graphics.getHeight() - margen - tamañoIcono,                          // y: desde arriba hacia abajo
+                Gdx.graphics.getWidth() - margen - tamañoIcono - i * (tamañoIcono + 10),
+                Gdx.graphics.getHeight() - margen - tamañoIcono,
                 tamañoIcono,
                 tamañoIcono
             );
@@ -83,7 +83,6 @@ public class GameScreen implements Screen {
         lote.end();
     }
     private void actualizar(float delta) {
-        // 1) generación de objetos
         temporizadorFruta += delta;
         temporizadorBomba  += delta;
         if (temporizadorFruta > 0.8f) {
@@ -94,13 +93,11 @@ public class GameScreen implements Screen {
             generarBomba();
             temporizadorBomba = 0f;
         }
-        // 2) detección de cortes: llamar a cortar()/explotar() + puntos/vidas, SIN eliminar aún
         for (Vector2 punto : manejadorEntrada.getTrayectoCorte()) {
             for (GameObject obj : objetos) {
                 if (!obj.haSidoCortado(punto)) continue;
                 if (obj.esPeligroso()) {
                     Bomb bomba = (Bomb) obj;
-                    // solo explotar/contar vidas la primera vez
                     if (!bomba.isExplotada()) {
                         bomba.explotar();
                         AssetManager.explBomba.play();
@@ -113,31 +110,25 @@ public class GameScreen implements Screen {
                     }
                 } else {
                     Fruit fruta = (Fruit) obj;
-                    // solo cortar/contar puntos la primera vez
                     if (!fruta.isCortada()) {
                         fruta.cortar();
                         AssetManager.corte.play();
                         puntuacion++;
                     }
                 }
-                // no eliminamos aquí, dejamos que el bucle de “eliminación diferida” lo haga
             }
         }
         manejadorEntrada.limpiarTrayecto();
-        // 3) actualización de posición y eliminación diferida
         Iterator<GameObject> iter = objetos.iterator();
         while (iter.hasNext()) {
             GameObject obj = iter.next();
             obj.actualizar(delta);
-            // fruta cortada fuera de pantalla
             if (obj instanceof Fruit && ((Fruit) obj).estaDesaparecida()) {
                 iter.remove();
             }
-            // bomba explotada y animación terminada
             else if (obj instanceof Bomb && ((Bomb) obj).haTerminadoExplosión()) {
                 iter.remove();
             }
-            // cualquier objeto que, por otro motivo, haya salido de pantalla
             else if (obj.estaFueraPantalla()) {
                 iter.remove();
             }
